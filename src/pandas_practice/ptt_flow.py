@@ -2,6 +2,15 @@ import glob
 
 import pandas as pd
 
+COLUMNS = [
+    "推",
+    "噓",
+    "分數",
+    "作者",
+    "標題",
+    "時間",
+]
+
 #Define functions
 def get_text_file_paths() -> list[str]:
     return glob.glob(
@@ -19,26 +28,30 @@ def t_text_to_df_row_list(reply_info_string: str) -> list[str]:
 def t_combine_list_to_df(reply_info_list: list[list]) -> pd.DataFrame:
     return pd.DataFrame(
         data = reply_info_lists,
-        cloumns = COLUMNS,
+        columns = COLUMNS,
     )
 
 def l_df_to_csv(df: pd.DataFrame) -> None:
-    df.to_csv("ptt.csv", index=0)
+    df.to_csv("ptt_2.csv", index=0)
+    
 
 if __name__ == "__main__": #主要函數會在main裡頭
-    pass
-#Get path of all text files
-path_list = get_text_file_paths()
+    #Get path of all text files
+    path_list = get_text_file_paths()
 
-#Loop for file paths
-for path in paths_list: 
-    #Extract text file
-    article_string = e_text_file(path)
-    
-    #Text to list-element in DataFrame
-    reply_info_list = t
+    #Loop for file paths
+    data = []
+    for path in paths_list: 
+        #Extract text file
+        article_string = e_text_file(path)
+        
+        #Text to list-element in DataFrame
+        reply_info_list = t_text_to_df_row_list(article_string)
+        data.append(reply_info_list)
+        
     #Concat lists to DataFrame
-    
-#Load DataFrame to CSV
-
+    df = t_combine_list_to_df(data)
+        
+    #Load DataFrame to CSV
+    l_df_to_csv(df)
     
