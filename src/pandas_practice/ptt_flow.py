@@ -25,7 +25,7 @@ def t_text_to_df_row_list(reply_info_string: str) -> list[str]:
     reply_info_string = article_string.split("---split---")[1]
     return reply_info_string.split("\n")[1:-1]
 
-def t_combine_list_to_df(reply_info_list: list[list]) -> pd.DataFrame:
+def t_combine_list_to_df(reply_info_lists: list[list]) -> pd.DataFrame:
     return pd.DataFrame(
         data = reply_info_lists,
         columns = COLUMNS,
@@ -41,7 +41,7 @@ if __name__ == "__main__": #主要函數會在main裡頭
 
     #Loop for file paths
     data = []
-    for path in paths_list: 
+    for path in path_list: 
         #Extract text file
         article_string = e_text_file(path)
         
